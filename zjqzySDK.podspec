@@ -14,9 +14,8 @@ Pod::Spec.new do |s|
   s.author             = { "zjqzy" => "zjqzy03080312@163.com" }
 
   s.platform     = :ios, "9.0"
-  use_frameworks!
 
-  s.source       = { :git => "http://github.com/zjqzy/zjqzySDK.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/zjqzy/zjqzySDK.git", :tag => "#{s.version}" }
 
   # s.source_files  = "Classes", "Classes/**/*.{h,m}"
   # s.exclude_files = "Classes/Exclude"
