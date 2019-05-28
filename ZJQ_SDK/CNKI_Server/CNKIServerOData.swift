@@ -10,7 +10,7 @@
 import UIKit;
 import CommonCrypto;
 
-class CNKIServerOData: NSObject {
+public class CNKIServerOData: NSObject {
     
     // MARK: - 存储属性 -
     /// 配置
@@ -56,7 +56,7 @@ class CNKIServerOData: NSObject {
     // MARK: - 单例 -
     //单例 Sington
     static private let _sharedInstance = CNKIServerOData()
-    class var sharedInstance : CNKIServerOData {
+    public class var sharedInstance : CNKIServerOData {
         return _sharedInstance
     }
     
@@ -81,7 +81,7 @@ class CNKIServerOData: NSObject {
     
     
     // MARK: - 基础方法 -
-    func sha1(src:String) -> String{
+    public func sha1(src:String) -> String{
         
         // sha1s
         
@@ -100,7 +100,7 @@ class CNKIServerOData: NSObject {
         }
         return output as String
     }
-    func dictionaryFromArray(fields:Array<Dictionary<String, Any>>)->Dictionary<String,Any>{
+    public func dictionaryFromArray(fields:Array<Dictionary<String, Any>>)->Dictionary<String,Any>{
         
         var rowInfo:Dictionary<String,Any>=[:]
         for field in fields {
@@ -116,7 +116,7 @@ class CNKIServerOData: NSObject {
         
         return rowInfo;
     }
-    func rowsEditFromRows(rows:Array<Dictionary<String, Any>>) -> Array<Any> {
+    public func rowsEditFromRows(rows:Array<Dictionary<String, Any>>) -> Array<Any> {
         
         var arrRet:Array<Any>=Array<Any>()
         
@@ -135,7 +135,7 @@ class CNKIServerOData: NSObject {
         
         return arrRet;
     }
-    func dictFromResponseData( data:Data,msg:String)->Dictionary<String, Any>?{
+    public func dictFromResponseData( data:Data,msg:String)->Dictionary<String, Any>?{
         
         var dictRet:Dictionary<String, Any>?
         
@@ -156,7 +156,7 @@ class CNKIServerOData: NSObject {
 
         return dictRet;
     }
-    func URLPerform(httpURL:String,sign:String,body:String = "") -> Dictionary<String,Any>? {
+    public func URLPerform(httpURL:String,sign:String,body:String = "") -> Dictionary<String,Any>? {
         
         var dictRet:Dictionary<String,Any>?
         
@@ -242,7 +242,7 @@ class CNKIServerOData: NSObject {
     }
     
     // MARK: - 扩展 -
-    func search(type:String,fields:String,query:String = "",group:String = "",order:String = "",start:String = "0" ,length:String = "20")->Dictionary<String, Any>?{
+    public func search(type:String,fields:String,query:String = "",group:String = "",order:String = "",start:String = "0" ,length:String = "20")->Dictionary<String, Any>?{
         
         var dictRet:Dictionary<String, Any>?
         

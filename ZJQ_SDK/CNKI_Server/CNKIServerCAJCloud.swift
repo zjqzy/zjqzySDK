@@ -10,18 +10,18 @@
 import UIKit
 import CommonCrypto;
 
-class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
+public class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
 
     
     /// 服务地址
-    var cnki_cajcloud_Server:String = "";
+    public var cnki_cajcloud_Server:String = "";
     
     /// 产品标识  （开发者）
-    var appKey:String = "";
-    var appSecretKey:String = "";
+    public var appKey:String = "";
+    public var appSecretKey:String = "";
     
     /// 云后台，授权得到
-    var cloudAuth:String = "";
+    public var cloudAuth:String = "";
     
     /// 与服务器时间差,单位秒
     private var timeDifference:Double = 0;
@@ -50,7 +50,7 @@ class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     // MARK: - 单例 -
     //单例 Sington
     static private let _sharedInstance = CNKIServerCAJCloud()
-    class var sharedInstance : CNKIServerCAJCloud {
+    public class var sharedInstance : CNKIServerCAJCloud {
         return _sharedInstance
     }
     
@@ -75,7 +75,7 @@ class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     
     
     // MARK: - 基础方法 -
-    func sha1(src:String) -> String{
+    public func sha1(src:String) -> String{
         
         // sha1s
         
@@ -94,7 +94,7 @@ class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         }
         return output as String
     }
-    func dictionaryFromArray(fields:Array<Dictionary<String, Any>>)->Dictionary<String,Any>{
+    public func dictionaryFromArray(fields:Array<Dictionary<String, Any>>)->Dictionary<String,Any>{
         
         var rowInfo:Dictionary<String,Any>=[:]
         for field in fields {
@@ -110,7 +110,7 @@ class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         return rowInfo;
     }
-    func rowsEditFromRows(rows:Array<Dictionary<String, Any>>) -> Array<Any> {
+    public func rowsEditFromRows(rows:Array<Dictionary<String, Any>>) -> Array<Any> {
         
         var arrRet:Array<Any>=Array<Any>()
         
@@ -129,7 +129,7 @@ class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         return arrRet;
     }
-    func dictFromResponseData( data:Data,msg:String)->Dictionary<String, Any>?{
+    public func dictFromResponseData( data:Data,msg:String)->Dictionary<String, Any>?{
         
         var dictRet:Dictionary<String, Any>?
         
@@ -150,7 +150,7 @@ class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         return dictRet;
     }
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         
         // 单向认证
         if challenge.protectionSpace.authenticationMethod
@@ -196,7 +196,7 @@ class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
 //        completionHandler(disposition, credential)
 //
 //    }
-    func URLPerform(httpURL:String,sign:String,timestamp:String,body:Data?) -> Dictionary<String,Any>? {
+    public func URLPerform(httpURL:String,sign:String,timestamp:String,body:Data?) -> Dictionary<String,Any>? {
         
         var dictRet:Dictionary<String,Any>?
         
@@ -262,7 +262,7 @@ class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         return dictRet;
     }
-    func Login(username:String,password:String,platform:String,clientid:String,version:String) -> Dictionary<String,Any>? {
+    public func Login(username:String,password:String,platform:String,clientid:String,version:String) -> Dictionary<String,Any>? {
         
         var dictRet:Dictionary<String, Any>?
         

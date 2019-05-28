@@ -5,33 +5,31 @@
  
  CNKI 电商服务
  
- 参考 http://192.168.100.132/EcpOpen/wiki
- 
  */
 
 import UIKit
 
-class CNKIServerECP: NSObject {
+public class CNKIServerECP: NSObject {
 
     // MARK: - 存储属性 -
     /// 电商服务地址
-    var cnki_ecp_Server:String = "";
+    public var cnki_ecp_Server:String = "";
     
     /// token服务地址
-    var cnki_token_Server:String = "";
+    public var cnki_token_Server:String = "";
     
     /// 令牌（产品标识）
     private var cnki_ecp_token:String = "";
     
     /// 产品标识  （开发者）
-    var appKey:String = "";
-    var appSecretKey:String = "";
+    public var appKey:String = "";
+    public var appSecretKey:String = "";
     
     
     // MARK: - 单例 -
     //单例 Sington
     static private let _sharedInstance = CNKIServerECP()
-    class var sharedInstance : CNKIServerECP {
+    public class var sharedInstance : CNKIServerECP {
         return _sharedInstance
     }
     
@@ -49,7 +47,7 @@ class CNKIServerECP: NSObject {
     }
 
     // MARK: - 基础方法 -
-    func dictFromResponseData( data:Data,msg:String)->Dictionary<String, Any>?{
+    public func dictFromResponseData( data:Data,msg:String)->Dictionary<String, Any>?{
         
         var dictRet:Dictionary<String, Any>?
         
@@ -70,7 +68,7 @@ class CNKIServerECP: NSObject {
         
         return dictRet;
     }
-    func tokenRefresh()->Dictionary<String,Any>?{
+    public func tokenRefresh()->Dictionary<String,Any>?{
         
         //var dictRet:Dictionary<String,Any>=Dictionary<String,Any>();
         var dictRet:Dictionary<String,Any>?
@@ -123,7 +121,7 @@ class CNKIServerECP: NSObject {
         
         return dictRet;
     }
-    func URLPerform(httpURL:String,body:String = "") -> Dictionary<String,Any>? {
+    public func URLPerform(httpURL:String,body:String = "") -> Dictionary<String,Any>? {
         
         var dictRet:Dictionary<String,Any>?
         
@@ -202,7 +200,7 @@ class CNKIServerECP: NSObject {
     ///   - spIds: 参数，可忽略
     ///   - status: 参数，可忽略
     /// - Returns: 服务器结果，可选类型
-    func log_get_recharge_history(userName:String,paySources:String,startDate:String = "",endDate:String = "",spIds:String = "",status:String = "")->Dictionary<String,Any>? {
+    public func log_get_recharge_history(userName:String,paySources:String,startDate:String = "",endDate:String = "",spIds:String = "",status:String = "")->Dictionary<String,Any>? {
         
         let httpURL="\(self.cnki_ecp_Server)/Log/get_recharge_history?userName=\(userName)&paySources=\(paySources)"
         

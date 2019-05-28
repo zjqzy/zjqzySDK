@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
   s.swift_version = '5'
   s.platform     = :ios, "9.0"
   s.requires_arc  = true
+  s.static_framework = true
 
   s.source_files = [
     'ZJQ_SDK/ZJQ_Log/*.{h,swift}',

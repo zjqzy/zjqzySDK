@@ -15,11 +15,11 @@ public class ZJQLogger {
     
     
     // log是否输出时间
-    static var showLogTime:Int=1;
+    public static var showLogTime:Int=1;
     
     // 日期格式
     static private var zjqDateFormatter = DateFormatter()
-    static var defaultDateFormatter: DateFormatter {
+    public static var defaultDateFormatter: DateFormatter {
         get {
             zjqDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
             return zjqDateFormatter
@@ -30,7 +30,7 @@ public class ZJQLogger {
     /// print
     ///
     /// - Parameter item: 闭包
-    final class func zPrint(_ item:@autoclosure() -> Any) {
+    public static func zPrint(_ item:@autoclosure() -> Any) {
         
         #if DEBUG
         
@@ -54,7 +54,7 @@ public class ZJQLogger {
     ///   - file: 所在文件名
     ///   - function: 所在函数
     ///   - line: 所在行数
-    static func assert(_ predicate: @autoclosure () -> Bool ,_ message: @autoclosure () -> String = String(), file: String = #file,function:String = #function, line: UInt = #line){
+    public static func assert(_ predicate: @autoclosure () -> Bool ,_ message: @autoclosure () -> String = String(), file: String = #file,function:String = #function, line: UInt = #line){
         #if !NDEBUG
         if !predicate() {
             
@@ -75,7 +75,7 @@ public class ZJQLogger {
     ///   - file: 所在文件名
     ///   - function: 所在函数
     ///   - line: 所在行数
-    static func log<T>(_ message:T , file: String = #file,function:String = #function, line: UInt = #line){
+    public static func log<T>(_ message:T , file: String = #file,function:String = #function, line: UInt = #line){
         
         #if DEBUG
         
@@ -96,7 +96,7 @@ public class ZJQLogger {
     ///   - file: 所在文件名
     ///   - function: 所在函数
     ///   - line: 所在行数
-    static func logF<T>(_ message:T, file:String = #file, function:String = #function, line:Int = #line) {
+    public static func logF<T>(_ message:T, file:String = #file, function:String = #function, line:Int = #line) {
         
         
         let fileName = (file as NSString).lastPathComponent
