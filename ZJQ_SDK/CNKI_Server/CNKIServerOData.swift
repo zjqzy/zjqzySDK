@@ -10,7 +10,7 @@
 import UIKit;
 import CommonCrypto;
 
-public class CNKIServerOData: NSObject {
+open class CNKIServerOData: NSObject {
     
     // MARK: - 存储属性 -
     /// 配置

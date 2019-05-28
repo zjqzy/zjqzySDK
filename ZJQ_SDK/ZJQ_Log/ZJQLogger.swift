@@ -11,7 +11,7 @@
 import UIKit
 
 
-public class ZJQLogger {
+open class ZJQLogger {
     
     
     // log是否输出时间

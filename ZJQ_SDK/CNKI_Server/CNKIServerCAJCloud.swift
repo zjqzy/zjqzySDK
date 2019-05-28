@@ -10,7 +10,7 @@
 import UIKit
 import CommonCrypto;
 
-public class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
+open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
 
     
     /// 服务地址

@@ -9,7 +9,7 @@
 
 import UIKit
 
-public class CNKIServerECP: NSObject {
+open class CNKIServerECP: NSObject {
 
     // MARK: - 存储属性 -
     /// 电商服务地址
