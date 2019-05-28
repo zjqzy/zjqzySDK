@@ -36,7 +36,7 @@ open class CNKIServerOData: NSObject {
     private var odataTimeStamp:String = "0"
     
     // MARK: - 计算属性 -
-    private var nowServerTimeStamp : String {
+    public var nowServerTimeStamp : String {
         
         // 返回 秒
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
@@ -45,7 +45,7 @@ open class CNKIServerOData: NSObject {
         
     }
     
-    private var nowServerTimeStamp_Millisecond : String {
+    public var nowServerTimeStamp_Millisecond : String {
         // 返回 毫秒
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
         let millisecond = CLongLong(round((timeInterval-self.timeDifference)*1000))
