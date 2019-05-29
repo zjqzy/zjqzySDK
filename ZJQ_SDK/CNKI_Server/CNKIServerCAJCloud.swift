@@ -15,10 +15,33 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     
     /// 服务地址
     public var cnki_cajcloud_Server:String = "";
+    public func z_cnki_cajcloud_Server(_ url : String?) -> CNKIServerCAJCloud?{
+        
+        if url != nil {
+           self.cnki_cajcloud_Server=url!;
+            return self;
+        }
+        return nil;
+    }
     
     /// 产品标识  （开发者）
     public var appKey:String = "";
+    public func z_appKey(_ key:String?) -> CNKIServerCAJCloud? {
+        if key != nil {
+            self.appKey=key!;
+            return self;
+        }
+        return nil;
+    }
+    
     public var appSecretKey:String = "";
+    public func z_appSecretKey(_ secretKey:String?) -> CNKIServerCAJCloud? {
+        if secretKey != nil {
+            self.appSecretKey=secretKey!;
+            return self;
+        }
+        return nil;
+    }
     
     /// 云后台，授权得到
     public var cloudAuth:String = "";
