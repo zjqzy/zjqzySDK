@@ -14,6 +14,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        CNKIServerCAJCloud.sharedInstance.block_custom = {(para1) -> () in
+            //cusValue就是传过来的值
+            print("^_^:\(para1!)")
+        }
+        
+        _ = CNKIServerCAJCloud.sharedInstance.z_Server("123")?.z_appKey("234")?.z_appSecretKey("345")
+       
+//        let jsonFilePath = Bundle.main.path(forResource: "cnki_server", ofType: "json");
+//        _=CNKIServerCAJCloud.sharedInstance.load(jsonFilePath: jsonFilePath!)
+        
+
+        ZJQLogger.zPrint("\(CNKIServerCAJCloud.sharedInstance.cnki_cajcloud_Server)+\(CNKIServerCAJCloud.sharedInstance.appKey)+\(CNKIServerCAJCloud.sharedInstance.appSecretKey)")
+        
+
+        
+        
     }
     
     // MARK: - 旋转 -
