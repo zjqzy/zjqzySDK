@@ -414,7 +414,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         }
         
         // 执行
-        dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body)
+        dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body, otherInfo: dictInfo)
         
         return dictRet;
         

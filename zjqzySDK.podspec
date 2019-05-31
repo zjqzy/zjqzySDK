@@ -24,8 +24,9 @@ Pod::Spec.new do |s|
     'ZJQ_SDK/ZJQ_Log/*.{h,swift}',
     'ZJQ_SDK/CNKI_Server/*.{h,swift}',
   ]
-  s.resources = ['ZJQ_SDK/CNKI_Server/*.{bundle}']
 
+  s.resources = 'ZJQ_SDK/**/*.bundle'
+  # s.resource = "ZJQ_SDK/CNKI_Server/cnki_server.bundle"
 
   # s.source_files = 'JKLocationMananger/Classes/**/*'
   # s.exclude_files = "Classes/Exclude"
