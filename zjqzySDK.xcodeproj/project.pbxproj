@@ -70,9 +70,10 @@
 		66244801229BB6ED007B54F4 /* CNKI_Server */ = {
 			isa = PBXGroup;
 			children = (
+				665E683F229E6A7400892FD0 /* cnki_server.json */,
+				66244804229BB6ED007B54F4 /* CNKIServerCAJCloud.swift */,
 				66244802229BB6ED007B54F4 /* CNKIServerECP.swift */,
 				66244803229BB6ED007B54F4 /* CNKIServerOData.swift */,
-				66244804229BB6ED007B54F4 /* CNKIServerCAJCloud.swift */,
 			);
 			path = CNKI_Server;
 			sourceTree = "<group>";
@@ -106,7 +107,6 @@
 		664AB755229252D9003CEDCD /* zjqzySDK */ = {
 			isa = PBXGroup;
 			children = (
-				665E683F229E6A7400892FD0 /* cnki_server.json */,
 				664AB756229252D9003CEDCD /* AppDelegate.swift */,
 				664AB758229252D9003CEDCD /* ViewController.swift */,
 				664AB75A229252D9003CEDCD /* Main.storyboard */,

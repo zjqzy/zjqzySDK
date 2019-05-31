@@ -1,0 +1,28 @@
+{
+    "update": "2019-08-18",
+    "version":"1",
+    "cajcloud":{
+        "login_user_pwd":{
+            "name":"login_user_pwd",
+            "desc":"用户登录【用户名,密码,平台,设备ID,版本】",
+            "server":"",
+            "path":"/users/login",
+            "post":"1",
+            "notificationWhenError":"1",
+            "timeout":"0",
+            "other":""
+        },
+        "logout":{
+            "name":"logout",
+            "desc":"用户注销【token】",
+            "server":"",
+            "path":"/users/logout",
+            "post":"1",
+            "notificationWhenError":"1",
+            "timeout":"0",
+            "other":""
+        }
+        
+    },
+    "end":"end"
+}
