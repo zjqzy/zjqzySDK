@@ -24,6 +24,7 @@ Pod::Spec.new do |s|
     'ZJQ_SDK/ZJQ_Log/*.{h,swift}',
     'ZJQ_SDK/CNKI_Server/*.{h,swift}',
   ]
+  s.resources = ['ZJQ_SDK/CNKI_Server/*.{bundle}']
 
 
   # s.source_files = 'JKLocationMananger/Classes/**/*'

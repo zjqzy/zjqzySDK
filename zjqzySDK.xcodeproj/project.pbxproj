@@ -16,7 +16,7 @@
 		664AB75C229252D9003CEDCD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 664AB75A229252D9003CEDCD /* Main.storyboard */; };
 		664AB75E229252DB003CEDCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 664AB75D229252DB003CEDCD /* Assets.xcassets */; };
 		664AB761229252DB003CEDCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 664AB75F229252DB003CEDCD /* LaunchScreen.storyboard */; };
-		665E6840229E6A7400892FD0 /* cnki_server.json in Resources */ = {isa = PBXBuildFile; fileRef = 665E683F229E6A7400892FD0 /* cnki_server.json */; };
+		664B2CFD22A10BD600D08129 /* cnki_server.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 664B2CFC22A10BD600D08129 /* cnki_server.bundle */; };
 		665F0CFA2297EB5200AC4102 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 665F0CF92297EB5200AC4102 /* libc++.tbd */; };
 		665F0CFC2297EB6700AC4102 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 665F0CFB2297EB6600AC4102 /* libz.tbd */; };
 		665F0CFE2297EB6C00AC4102 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 665F0CFD2297EB6C00AC4102 /* libxml2.tbd */; };
@@ -35,7 +35,7 @@
 		664AB75D229252DB003CEDCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		664AB760229252DB003CEDCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		664AB762229252DB003CEDCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		665E683F229E6A7400892FD0 /* cnki_server.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cnki_server.json; sourceTree = "<group>"; };
+		664B2CFC22A10BD600D08129 /* cnki_server.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = cnki_server.bundle; sourceTree = "<group>"; };
 		665F0C182297E0E500AC4102 /* zjqzySDK-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zjqzySDK-Bridging-Header.h"; sourceTree = "<group>"; };
 		665F0CF92297EB5200AC4102 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		665F0CFB2297EB6600AC4102 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -70,7 +70,7 @@
 		66244801229BB6ED007B54F4 /* CNKI_Server */ = {
 			isa = PBXGroup;
 			children = (
-				665E683F229E6A7400892FD0 /* cnki_server.json */,
+				664B2CFC22A10BD600D08129 /* cnki_server.bundle */,
 				66244804229BB6ED007B54F4 /* CNKIServerCAJCloud.swift */,
 				66244802229BB6ED007B54F4 /* CNKIServerECP.swift */,
 				66244803229BB6ED007B54F4 /* CNKIServerOData.swift */,
@@ -188,9 +188,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				664B2CFD22A10BD600D08129 /* cnki_server.bundle in Resources */,
 				664AB761229252DB003CEDCD /* LaunchScreen.storyboard in Resources */,
 				664AB75E229252DB003CEDCD /* Assets.xcassets in Resources */,
-				665E6840229E6A7400892FD0 /* cnki_server.json in Resources */,
 				664AB75C229252D9003CEDCD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

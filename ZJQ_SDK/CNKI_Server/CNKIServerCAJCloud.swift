@@ -109,14 +109,13 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         //print("init \(#function)");
         super.init();
         
-        // load
+        // json
         let bundle:Bundle=Bundle(for: type(of: self));
-        let jsonFile:String?=bundle.path(forResource: "cnki_server", ofType: "json");
+        let jsonFile:String?=bundle.path(forResource: "cnki_server", ofType: "json", inDirectory: "cnki_server.bundle");
+
         if jsonFile != nil {
             _=self.load(jsonFilePath: jsonFile!)
         }
-
-        
     }
     
     //析构 销毁对象
