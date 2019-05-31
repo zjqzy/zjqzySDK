@@ -333,7 +333,8 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
 //        let session = URLSession.shared
         let config = URLSessionConfiguration.default
         if otherInfo != nil {
-            let timeout:TimeInterval = (otherInfo?["timeout"] as? TimeInterval) ?? 0
+
+            let timeout:TimeInterval = TimeInterval(otherInfo?["timeout"] as! String) ?? 0
             config.timeoutIntervalForRequest = max(timeout, 30.0)   //默认60
         }
         
