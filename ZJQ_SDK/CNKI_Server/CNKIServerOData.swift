@@ -14,20 +14,32 @@ open class CNKIServerOData: NSObject {
     
     // MARK: - 存储属性 -
     /// 配置
-    private var cnki_odata_Server:String = "";
+    open var cnki_odata_Server:String = "";
     
     /// 产品标识  （开发者）
-    var appKey:String = "";
-    var appSecretKey:String = "";
+    open var appKey:String = "";
+    open var appSecretKey:String = "";
+    
+    func z_initPare(_ server:String) -> (_ appkey:String) -> ( _ secretKey:String) ->Void {
+        
+        return { (_ appkey:String) -> (_ secretKey:String) ->Void in
+            return {  (_ secretKey:String) ->Void in
+                self.cnki_odata_Server=server;
+                self.appKey=appkey
+                self.appSecretKey=secretKey;
+            }
+        }
+    }
+
     
     /// 请求附加信息，可直接默认值
-    var deviceIP:String = "127.8.8.8";
-    var deviceID:String = "{123456}";
-    var phoneNumber:String = "";
-    var deviceLocation:String = "0,0";
+    open var deviceIP:String = "127.8.8.8";
+    open var deviceID:String = "{123456}";
+    open var phoneNumber:String = "";
+    open var deviceLocation:String = "0,0";
     
     /// 云后台，授权得到
-    var cloudAuth:String = "";
+    open var cloudAuth:String = "";
     
     /// 与服务器时间差,单位秒
     private var timeDifference:Double = 0;
@@ -64,7 +76,7 @@ open class CNKIServerOData: NSObject {
     //避免外部对象通过访问init方法创建单例类的其他实例
     private
     override init() {
-        //print("init \(#function)");
+        super.init();
     }
     
     //析构 销毁对象

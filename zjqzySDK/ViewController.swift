@@ -15,6 +15,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        CNKIServerOData.sharedInstance.z_initPare("1")("2")("3")
+        
         CNKIServerCAJCloud.sharedInstance.block_custom = {(para1) -> () in
             //cusValue就是传过来的值
             print("^_^:\(para1!)")

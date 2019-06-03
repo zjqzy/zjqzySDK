@@ -135,9 +135,15 @@ open class ZJQLogger {
     
     /// 构造
     init() {
-        
+//        print("init \(#function)");
     }
     deinit {
-        
+//        ZJQLogger.zPrint("析构: \(type(of: self))")
+//
+//        print("deinit: \(type(of: self))")
+//        print("deinit: \(NSStringFromClass(type(of: self)).components(separatedBy: ".").last!)")
+//        NSLog("%@", self); //fail 写self 报错
+//        NSLog("%@", self.description); //ok
+
     }
 }

@@ -20,19 +20,19 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
 
     
     /// 服务地址
-    public var cnki_cajcloud_Server:String = "";
-    public func z_Server(_ url : String?) -> CNKIServerCAJCloud?{
+    open var cnki_cajcloud_Server:String = "";
+    open func z_Server(_ url : String?) -> CNKIServerCAJCloud?{
         
         if url != nil {
-           self.cnki_cajcloud_Server=url!;
+            self.cnki_cajcloud_Server=url!;
             return self;
         }
         return nil;
     }
     
     /// 产品标识  （开发者）
-    public var appKey:String = "";
-    public func z_appKey(_ key:String?) -> CNKIServerCAJCloud? {
+    open var appKey:String = "";
+    open func z_appKey(_ key:String?) -> CNKIServerCAJCloud? {
         if key != nil {
             self.appKey=key!;
             return self;
@@ -40,8 +40,8 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         return nil;
     }
     
-    public var appSecretKey:String = "";
-    public func z_appSecretKey(_ secretKey:String?) -> CNKIServerCAJCloud? {
+    open var appSecretKey:String = "";
+    open func z_appSecretKey(_ secretKey:String?) -> CNKIServerCAJCloud? {
         if secretKey != nil {
             self.appSecretKey=secretKey!;
             
@@ -57,13 +57,13 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     }
     
     /// 云后台，授权得到
-    public var cloudAuth:String = "";
+    open var cloudAuth:String = "";
     
     
     /// 属性block
     //public typealias blocktype1 = (_ paramOne : String? ) -> () //ok
     //public var block1:blocktype1?;  //ok
-    public var block_custom:((_ para1:Dictionary<String,Any>? )->Any)?
+    open var block_custom:((_ para1:Dictionary<String,Any>? )->Any)?
     
     /// 与服务器时间差,单位秒
     private var timeDifference:Double = 0;
@@ -106,7 +106,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     //避免外部对象通过访问init方法创建单例类的其他实例
     private
     override init() {
-        //print("init \(#function)");
         super.init();
         
         // json
@@ -122,11 +121,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     deinit {
         
         ZJQLogger.zPrint("析构: \(type(of: self))")
-        
-        //        print("deinit: \(type(of: self))")
-        //        print("deinit: \(NSStringFromClass(type(of: self)).components(separatedBy: ".").last!)")
-        //        NSLog("%@", self); //fail 写self 报错
-        //        NSLog("%@", self.description); //ok
         
     }
     public func load(jsonFilePath:String)->Dictionary<String,Any>?{
@@ -145,11 +139,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         //let txtData = fileManager.contents(atPath: url!.path)
         
         do {
-            /*
-             * try 和 try! 的区别
-             * try 发生异常会跳到catch代码中
-             * try! 发生异常程序会直接crash
-             */
             
             let data = try Data(contentsOf: url)
             //let dataString = String(data: data, encoding: String.Encoding.utf8)
@@ -172,10 +161,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     // MARK: - 基础方法 -
     public func sha1(src:String) -> String{
         
-        // sha1s
-        
         let data1:Data! = src.data(using: String.Encoding.utf8, allowLossyConversion: true);
-        
         
         var digest=[UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
         let bytes = [UInt8](data1)
@@ -233,7 +219,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             
             //let aa = (( dictRet?["result"] as? Int ) ?? 0 )
             if (( dictRet?["result"] as? Int ) ?? 0 ) > 0{
-                // 前期数据纠正
+                // 这里数据修正，越早越好
                 
             }
             
@@ -322,7 +308,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         request.setValue(self.cloudAuth, forHTTPHeaderField:"CloudAuth")
         
         // post
-        
         if body != nil {
             
             request.httpMethod = "POST"
@@ -339,8 +324,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             if timeout > 1 {
                 config.timeoutIntervalForRequest = timeout   //默认60
             }
-            
-            
         }
         
         let session = URLSession(configuration: config, delegate: self, delegateQueue: OperationQueue.main)
@@ -389,7 +372,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             NotificationCenter.default.post(name: Notification.Name.init(k_notification_cajcloud_error), object: nil, userInfo: notifyPara)
         }
         
-        
         return dictRet;
     }
     
@@ -425,7 +407,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         return dictRet;
         
     }
-    
     
     public func Login(username:String,password:String,platform:String,clientid:String,version:String) -> Dictionary<String,Any>? {
         

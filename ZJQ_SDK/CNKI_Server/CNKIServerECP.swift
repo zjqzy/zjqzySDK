@@ -13,18 +13,31 @@ open class CNKIServerECP: NSObject {
 
     // MARK: - 存储属性 -
     /// 电商服务地址
-    public var cnki_ecp_Server:String = "";
+    open var cnki_ecp_Server:String = "";
     
     /// token服务地址
-    public var cnki_token_Server:String = "";
+    open var cnki_token_Server:String = "";
     
     /// 令牌（产品标识）
     private var cnki_ecp_token:String = "";
     
     /// 产品标识  （开发者）
-    public var appKey:String = "";
-    public var appSecretKey:String = "";
+    open var appKey:String = "";
+    open var appSecretKey:String = "";
     
+    func z_initPare(_ server:String) -> (_ tokenServer:String) -> (_ appkey:String) -> ( _ secretKey:String) ->Void {
+        
+        return {(_ tokenServer:String) -> (_ appkey:String) -> ( _ secretKey:String) ->Void in
+            return { (_ appkey:String) -> (_ secretKey:String) ->Void in
+                return {  (_ secretKey:String) ->Void in
+                    self.cnki_ecp_Server=server;
+                    self.cnki_token_Server=tokenServer;
+                    self.appKey=appkey
+                    self.appSecretKey=secretKey;
+                }
+            }
+        }
+    }
     
     // MARK: - 单例 -
     //单例 Sington
@@ -38,7 +51,7 @@ open class CNKIServerECP: NSObject {
     //避免外部对象通过访问init方法创建单例类的其他实例
     private
     override init() {
-        //print("init \(#function)");
+        super.init()
     }
     
     //析构 销毁对象
@@ -115,8 +128,8 @@ open class CNKIServerECP: NSObject {
         
         //使用resume方法启动任务
         dataTask.resume()
-        //等待完成..
         
+        //等待完成..
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         
         return dictRet;
@@ -148,11 +161,9 @@ open class CNKIServerECP: NSObject {
         
         // post
         if body.count>0 {
-            
             request.httpMethod = "POST"
             request.httpBody=body.data(using: .utf8);
         }
-        
         
         // 开始请求
         let session = URLSession.shared
