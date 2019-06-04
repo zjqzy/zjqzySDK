@@ -1,6 +1,11 @@
 {
-    "update": "2019-08-18",
-    "version":"1",
+    "update":{
+        "date":"2019-08-18",
+        "type":"cnki_server",
+        "version":"1",
+        "timestamp":"1556085404000"
+    },
+    
     "cajcloud":{
         "login_user_pwd":{
             "name":"login_user_pwd",
@@ -8,6 +13,7 @@
             "server":"",
             "path":"/users/login",
             "post":"1",
+            "maxRepeatRequestWhenError":"3",
             "notificationWhenError":"1",
             "timeout":"0",
             "other":""
@@ -18,6 +24,7 @@
             "server":"",
             "path":"/users/logout",
             "post":"1",
+            "maxRepeatRequestWhenError":"3",
             "notificationWhenError":"1",
             "timeout":"0",
             "other":""

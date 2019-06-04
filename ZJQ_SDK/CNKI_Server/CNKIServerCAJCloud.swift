@@ -60,6 +60,9 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     open var cloudAuth:String = "";
     
     
+    /// 当请求出错时，尝试次数
+    open var repeatRequestWhenError:Int=0;
+    
     /// 属性block
     //public typealias blocktype1 = (_ paramOne : String? ) -> () //ok
     //public var block1:blocktype1?;  //ok
@@ -277,16 +280,9 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
 //        completionHandler(disposition, credential)
 //
 //    }
-    public func URLPerform(httpURL:String,sign:String,timestamp:String,body:Data?,otherInfo:Dictionary<String,Any>?=nil) -> Dictionary<String,Any>? {
+    public func URLPerform(httpURL:String,sign:String,timestamp:String,body:Data?,otherInfo:Dictionary<String,Any>?=nil) -> Dictionary<String,Any> {
         
-        var dictRet:Dictionary<String,Any>?
-        
-        var notifyPara:Dictionary<String,Any>=[:]
-        notifyPara["httpURL"]=httpURL
-        notifyPara["timestamp"]=timestamp
-        if body != nil {
-            notifyPara["body"]=body!
-        }
+        var dictRet:Dictionary<String,Any> = [:]
         
         //        let charSet = NSMutableCharacterSet()
         //        charSet.formUnion(with: CharacterSet.urlQueryAllowed)
@@ -335,21 +331,23 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             
             if error != nil{
                 
-                notifyPara["error"]="\(error!)"
-                NotificationCenter.default.post(name: Notification.Name.init(k_notification_cajcloud_error), object: nil, userInfo: notifyPara)
-                
+                dictRet["error"]="\(error!)"
                 ZJQLogger.zPrint("\(error!)");
                 
             } else {
                 
-                dictRet = self.dictFromResponseData(data:data!, msg:httpURL)
-                if dictRet == nil {
+                let dictJson = self.dictFromResponseData(data:data!, msg:httpURL)
+                if dictJson == nil {
                     
                     let str = String(data: data!, encoding: String.Encoding.utf8)
+                    
+                    dictRet["error"]="\(str!)"
                     ZJQLogger.zPrint("请求成功，数据json失败:\(str!)");
-                    
-                    notifyPara["error"]="请求成功，数据json失败:\(str!)"
-                    
+
+                }
+                else
+                {
+                    dictRet=dictJson!;
                 }
             }
             
@@ -362,15 +360,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         //等待完成..
         
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
-        
-        // 通知
-        let canNotification:Int = (otherInfo?["notificationWhenError"] as? Int) ?? 0
-        let error1:String? = notifyPara["error"] as? String
-        if error1 != nil
-            && canNotification > 0
-        {
-            NotificationCenter.default.post(name: Notification.Name.init(k_notification_cajcloud_error), object: nil, userInfo: notifyPara)
-        }
         
         return dictRet;
     }
@@ -403,6 +392,35 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         // 执行
         dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body, otherInfo: dictInfo)
+        
+        // 尝试请求次数
+        self.repeatRequestWhenError=1;
+        let maxRepeatRequestWhenError:Int = (dictInfo?["maxRepeatRequestWhenError"] as? Int) ?? 0
+        var error1:String? = dictRet?["error"] as? String
+        
+        while error1 != nil && maxRepeatRequestWhenError>self.repeatRequestWhenError {
+            
+            self.repeatRequestWhenError += 1;
+            dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body, otherInfo: dictInfo)
+            
+            error1 = dictRet?["error"] as? String
+        }
+        
+        // 通知
+        let canNotification:Int = (dictInfo?["notificationWhenError"] as? Int) ?? 0
+        if error1 != nil
+            && canNotification > 0
+        {
+            var notifyPara:Dictionary<String,Any>=[:]
+            notifyPara["httpURL"]=httpURL
+            notifyPara["timestamp"]=self.cajcloudTimeStamp
+            if body != nil {
+                notifyPara["body"]=body!
+            }
+            notifyPara["error"]=dictRet?["error"];
+            
+            NotificationCenter.default.post(name: Notification.Name.init(k_notification_cajcloud_error), object: nil, userInfo: notifyPara)
+        }
         
         return dictRet;
         
