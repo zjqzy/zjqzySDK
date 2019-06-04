@@ -21,6 +21,7 @@
 		665F0CFC2297EB6700AC4102 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 665F0CFB2297EB6600AC4102 /* libz.tbd */; };
 		665F0CFE2297EB6C00AC4102 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 665F0CFD2297EB6C00AC4102 /* libxml2.tbd */; };
 		665F0D002297EB8700AC4102 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 665F0CFF2297EB8700AC4102 /* libiconv.tbd */; };
+		66CBEEBA22A66AF3000F126F /* CNKIServerCAJCloud+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBEEB922A66AF3000F126F /* CNKIServerCAJCloud+ex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		665F0CFB2297EB6600AC4102 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		665F0CFD2297EB6C00AC4102 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		665F0CFF2297EB8700AC4102 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		66CBEEB922A66AF3000F126F /* CNKIServerCAJCloud+ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNKIServerCAJCloud+ex.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			children = (
 				664B2CFC22A10BD600D08129 /* cnki_server.bundle */,
 				66244804229BB6ED007B54F4 /* CNKIServerCAJCloud.swift */,
+				66CBEEB922A66AF3000F126F /* CNKIServerCAJCloud+ex.swift */,
 				66244802229BB6ED007B54F4 /* CNKIServerECP.swift */,
 				66244803229BB6ED007B54F4 /* CNKIServerOData.swift */,
 			);
@@ -203,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				66244809229BB6ED007B54F4 /* CNKIServerCAJCloud.swift in Sources */,
+				66CBEEBA22A66AF3000F126F /* CNKIServerCAJCloud+ex.swift in Sources */,
 				66244807229BB6ED007B54F4 /* CNKIServerECP.swift in Sources */,
 				66244808229BB6ED007B54F4 /* CNKIServerOData.swift in Sources */,
 				664AB759229252D9003CEDCD /* ViewController.swift in Sources */,

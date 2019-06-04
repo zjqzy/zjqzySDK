@@ -11,14 +11,11 @@ import UIKit
 import CommonCrypto;
 
 
-/// 通知
-public let k_notification_cajcloud_error: String = "k_notification_cajcloud_request_error"
+public let k_notification_cajcloud_error: String = "k_notification_cajcloud_request_error"  // 通知
 
 
-///
 open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
 
-    
     /// 服务地址
     open var cnki_cajcloud_Server:String = "";
     open func z_Server(_ url : String?) -> CNKIServerCAJCloud?{
@@ -59,7 +56,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     /// 云后台，授权得到
     open var cloudAuth:String = "";
     
-    
     /// 当请求出错时，尝试次数
     open var repeatRequestWhenError:Int=0;
     
@@ -69,14 +65,14 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     open var block_custom:((_ para1:Dictionary<String,Any>? )->Any)?
     
     /// 与服务器时间差,单位秒
-    private var timeDifference:Double = 0;
+    var timeDifference:Double = 0;
     
     /// 请求时间戳
-    private var cajcloudTimeStamp:String = "0"
+    var cajcloudTimeStamp:String = "0"
     
     /// json
-    private var dictAllInfo:Dictionary<String,Any>?
-    private var dictCAJCloud:Dictionary<String,Any>?
+    var dictAllInfo:Dictionary<String,Any>?
+    var dictCAJCloud:Dictionary<String,Any>?
     
     
     // MARK: - 计算属性 -
@@ -99,7 +95,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     // MARK: - 单例 -
     //单例 Sington
     static private let _sharedInstance = CNKIServerCAJCloud()
-    
     public class var sharedInstance : CNKIServerCAJCloud {
         
         return _sharedInstance
@@ -126,6 +121,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         ZJQLogger.zPrint("析构: \(type(of: self))")
         
     }
+    
     public func load(jsonFilePath:String)->Dictionary<String,Any>?{
         // 读取json
         var dictRet:Dictionary<String,Any>?
@@ -364,7 +360,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         return dictRet;
     }
     
-    // MARK: - 扩展 -
     public func request_cajcloud(key:String,postdata:Dictionary<String,Any>?)->Dictionary<String,Any>? {
         
         var dictRet:Dictionary<String, Any>?=nil
@@ -425,35 +420,5 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         return dictRet;
         
     }
-    
-    public func Login(username:String,password:String,platform:String,clientid:String,version:String) -> Dictionary<String,Any>? {
-        
-        var dictRet:Dictionary<String, Any>?
-        
-        guard username.count>0 else {
-            return dictRet;
-        }
-        
-        self.cajcloudTimeStamp=self.nowServerTimeStamp;
-        
-        let sign1 = "\(self.cajcloudTimeStamp)\(self.appKey)"
-        let sign = self.sha1(src:sign1)
-        
-        let httpURL="\(self.cnki_cajcloud_Server)/users/login"
-        
-        // post数据
-        var para1:Dictionary<String,String>=Dictionary<String,String>()
-        para1["username"]=username;
-        para1["password"]=password;
-        para1["platform"]=platform;
-        para1["clientid"]=clientid;
-        para1["version"]=version;
-        let body=try! JSONSerialization.data(withJSONObject: para1, options: .prettyPrinted)
-        
-        // 执行
-        dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body)
-        
-        return dictRet;
-        
-    }
+
 }
