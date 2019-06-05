@@ -69,6 +69,8 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     /// 当请求出错时，尝试次数
     open var repeatRequestWhenError:Int=0;
     
+    /// 额外传递的文件头信息
+    open var dictHeaderExtra:Dictionary<String,String>?
     
     /// 属性block
     //public typealias blocktype1 = (_ paramOne : String? ) -> () //ok
@@ -310,6 +312,12 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         request.setValue(sign, forHTTPHeaderField:"sign")
         request.setValue(self.cloudAuth, forHTTPHeaderField:"CloudAuth")
         request.setValue(self.app_language_environment, forHTTPHeaderField:"app_language_environment")
+        
+        if self.dictHeaderExtra != nil {
+            for (key,value) in self.dictHeaderExtra!{
+                request.setValue(value, forHTTPHeaderField:key)
+            }
+        }
         
         // post
         if body != nil {
