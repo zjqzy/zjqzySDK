@@ -7,8 +7,9 @@
  
  */
 
-import UIKit
-import CommonCrypto;
+
+import Foundation
+import CommonCrypto
 
 
 public let k_notification_cajcloud_error: String = "k_notification_cajcloud_request_error"  // 通知
@@ -37,6 +38,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         return nil;
     }
     
+    /// 产品标识  （开发者）
     open var appSecretKey:String = "";
     open func z_appSecretKey(_ secretKey:String?) -> CNKIServerCAJCloud? {
         if secretKey != nil {
@@ -54,10 +56,19 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     }
     
     /// 云后台，授权得到
+    /// 对请求是否为自己人的再次判断
     open var cloudAuth:String = "";
+    
+    
+    /// 语言环境 Language environment ， 当请求出现错误时，影响返回的message
+    /// 无论什么环境，都会返回英文错误描述， 追加 其他语言的描述，如message（默认message,英文），message_cn,message_jp等
+    /// 如果为空，则只返回英文描述，message，没有message_cn,message_jp等
+    open var app_language_environment:String = "cn"
+    
     
     /// 当请求出错时，尝试次数
     open var repeatRequestWhenError:Int=0;
+    
     
     /// 属性block
     //public typealias blocktype1 = (_ paramOne : String? ) -> () //ok
@@ -298,6 +309,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         request.setValue(timestamp,forHTTPHeaderField:"timestamp")
         request.setValue(sign, forHTTPHeaderField:"sign")
         request.setValue(self.cloudAuth, forHTTPHeaderField:"CloudAuth")
+        request.setValue(self.app_language_environment, forHTTPHeaderField:"app_language_environment")
         
         // post
         if body != nil {
@@ -327,7 +339,9 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             
             if error != nil{
                 
-                dictRet["error"]="\(error!)"
+                dictRet["CAJErrorCode"]="-999"
+                dictRet["CAJErrorMsg"]="\(error!)"
+                
                 ZJQLogger.zPrint("\(error!)");
                 
             } else {
@@ -337,13 +351,28 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
                     
                     let str = String(data: data!, encoding: String.Encoding.utf8)
                     
-                    dictRet["error"]="\(str!)"
-                    ZJQLogger.zPrint("请求成功，数据json失败:\(str!)");
+                    dictRet["CAJErrorCode"]="-999"
+                    dictRet["CAJErrorMsg"]="请求成功，转换json失败：\(str!)"
+                    
+                    ZJQLogger.zPrint("请求成功，转换json失败:\(str!)");
 
                 }
                 else
                 {
+                    
+                    // 错误号
                     dictRet=dictJson!;
+                    
+                    let cajErrorCode = dictRet["errorcode"] ?? dictRet["errcode"]
+                    if cajErrorCode != nil {
+                        
+                        dictRet["CAJErrorCode"]="\(String(describing: cajErrorCode))"
+                        
+                        let cajErrorMsg = dictRet["message+\(self.app_language_environment)"] ?? dictRet["message"] ?? "unknown error"
+                        
+                        dictRet["CAJErrorMsg"]=cajErrorMsg
+                        
+                    }
                 }
             }
             
@@ -360,6 +389,13 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         return dictRet;
     }
     
+    
+    /// 请求
+    ///
+    /// - Parameters:
+    ///   - key: 请求key
+    ///   - postdata: 参数
+    /// - Returns: 返回结果或nil
     public func request_cajcloud(key:String,postdata:Dictionary<String,Any>?)->Dictionary<String,Any>? {
         
         var dictRet:Dictionary<String, Any>?=nil
@@ -379,7 +415,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         let httpURL="\(self.cnki_cajcloud_Server)\(path)"
         
-        // post数据
         var body:Data?=nil;
         if postdata != nil {
             body=try? JSONSerialization.data(withJSONObject: postdata!, options: .prettyPrinted)
@@ -391,14 +426,14 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         // 尝试请求次数
         self.repeatRequestWhenError=1;
         let maxRepeatRequestWhenError:Int = (dictInfo?["maxRepeatRequestWhenError"] as? Int) ?? 0
-        var error1:String? = dictRet?["error"] as? String
+        var error1:String? = dictRet?["CAJErrorCode"] as? String
         
         while error1 != nil && maxRepeatRequestWhenError>self.repeatRequestWhenError {
             
             self.repeatRequestWhenError += 1;
             dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body, otherInfo: dictInfo)
             
-            error1 = dictRet?["error"] as? String
+            error1 = dictRet?["CAJErrorCode"] as? String
         }
         
         // 通知
@@ -407,11 +442,11 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             && canNotification > 0
         {
             var notifyPara:Dictionary<String,Any>=[:]
+            notifyPara["key"]=key
+            notifyPara["postdata"]=postdata
             notifyPara["httpURL"]=httpURL
+            notifyPara["sign"]=sign
             notifyPara["timestamp"]=self.cajcloudTimeStamp
-            if body != nil {
-                notifyPara["body"]=body!
-            }
             notifyPara["error"]=dictRet?["error"];
             
             NotificationCenter.default.post(name: Notification.Name.init(k_notification_cajcloud_error), object: nil, userInfo: notifyPara)
@@ -420,5 +455,21 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         return dictRet;
         
     }
+    
+    
+    /// 错误请求重发机制
+    ///
+    /// - Parameter itemPara: 特定参数
+    /// - Returns: 返回结果或nil
+    public func error_request_redo(itemPara:Dictionary<String,Any>)->Dictionary<String,Any>? {
 
+        let key:String=itemPara["key"] as! String
+        let postdata:Dictionary<String, Any>=itemPara["postdata"] as! Dictionary<String, Any>
+        //let httpURL:String=itemPara["httpURL"] as! String
+        //let sign:String=itemPara["sign"] as! String
+        //let timestamp:String=itemPara["timestamp"] as! String
+        //let error=itemPara["error"]
+        
+        return self.request_cajcloud(key: key, postdata: postdata)
+    }
 }

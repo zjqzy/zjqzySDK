@@ -8,7 +8,7 @@
  
  */
 
-import UIKit
+import Foundation
 
 
 open class ZJQLogger {
