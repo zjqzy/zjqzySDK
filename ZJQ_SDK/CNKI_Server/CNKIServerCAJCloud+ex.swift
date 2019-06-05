@@ -8,6 +8,20 @@ extension CNKIServerCAJCloud{
         ZJQLogger.zPrint("v:1.0,zhujianqi")
     }
     
+    public func test(){
+        ZJQLogger.zPrint("test")
+    }
+
+    /// 登录，原先请求写法，没有最新的扩展，直接由外部控制 全部
+    /// 样本写法
+    ///
+    /// - Parameters:
+    ///   - username: 参数
+    ///   - password: 参数
+    ///   - platform: 参数
+    ///   - clientid: 参数
+    ///   - version: 参数
+    /// - Returns: 返回结果或nil
     public func Login(username:String,password:String,platform:String,clientid:String,version:String) -> Dictionary<String,Any>? {
         
         var dictRet:Dictionary<String, Any>?
