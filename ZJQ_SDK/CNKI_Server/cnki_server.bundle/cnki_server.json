@@ -14,6 +14,7 @@
             "path":"/users/login",
             "post":"1",
             "maxRepeatRequestWhenError":"3",
+            "whichErrorCanRepeat":"-180001,-180002",
             "notificationWhenError":"1",
             "timeout":"0",
             "other":""
@@ -25,6 +26,7 @@
             "path":"/users/logout",
             "post":"1",
             "maxRepeatRequestWhenError":"3",
+            "whichErrorCanRepeat":"-180001,-180002",
             "notificationWhenError":"1",
             "timeout":"0",
             "other":""

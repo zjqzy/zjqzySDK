@@ -347,7 +347,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             
             if error != nil{
                 
-                dictRet["CAJErrorCode"]="-999"
+                dictRet["CAJErrorCode"]="-180001"
                 dictRet["CAJErrorMsg"]="\(error!)"
                 
                 ZJQLogger.zPrint("\(error!)");
@@ -359,7 +359,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
                     
                     let str = String(data: data!, encoding: String.Encoding.utf8)
                     
-                    dictRet["CAJErrorCode"]="-999"
+                    dictRet["CAJErrorCode"]="-180002"
                     dictRet["CAJErrorMsg"]="请求成功，转换json失败：\(str!)"
                     
                     ZJQLogger.zPrint("请求成功，转换json失败:\(str!)");
@@ -374,7 +374,8 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
                     let cajErrorCode = dictRet["errorcode"] ?? dictRet["errcode"]
                     if cajErrorCode != nil {
                         
-                        dictRet["CAJErrorCode"]="\(String(describing: cajErrorCode))"
+                        //dictRet["CAJErrorCode"]="\(String(describing: cajErrorCode))"
+                        dictRet["CAJErrorCode"]="\(cajErrorCode!)"
                         
                         let cajErrorMsg = dictRet["message+\(self.app_language_environment)"] ?? dictRet["message"] ?? "unknown error"
                         
@@ -433,10 +434,16 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         // 尝试请求次数
         self.repeatRequestWhenError=1;
-        let maxRepeatRequestWhenError:Int = (dictInfo?["maxRepeatRequestWhenError"] as? Int) ?? 0
+        let maxRepeatRequestWhenError:Int = Int("\(dictInfo?["maxRepeatRequestWhenError"] ?? 0)") ?? 0
+        let whichErrorCanRepeat:String = (dictInfo?["maxRepeatRequestWhenError"] as? String) ?? ""
         var error1:String? = dictRet?["CAJErrorCode"] as? String
         
-        while error1 != nil && maxRepeatRequestWhenError>self.repeatRequestWhenError {
+        let findErrorCanRepeat = whichErrorCanRepeat.range(of: (error1 ?? ""))
+        
+        while error1 != nil
+            && findErrorCanRepeat != nil
+            &&  maxRepeatRequestWhenError>self.repeatRequestWhenError
+        {
             
             self.repeatRequestWhenError += 1;
             dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body, otherInfo: dictInfo)
@@ -445,7 +452,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         }
         
         // 通知
-        let canNotification:Int = (dictInfo?["notificationWhenError"] as? Int) ?? 0
+        let canNotification:Int = Int("\(dictInfo?["notificationWhenError"] ?? 0)") ?? 0
         if error1 != nil
             && canNotification > 0
         {
@@ -455,7 +462,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             notifyPara["httpURL"]=httpURL
             notifyPara["sign"]=sign
             notifyPara["timestamp"]=self.cajcloudTimeStamp
-            notifyPara["error"]=dictRet?["error"];
+            notifyPara["error"]=error1;
             
             NotificationCenter.default.post(name: Notification.Name.init(k_notification_cajcloud_error), object: nil, userInfo: notifyPara)
         }
@@ -469,7 +476,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     ///
     /// - Parameter itemPara: 特定参数
     /// - Returns: 返回结果或nil
-    public func error_request_redo(itemPara:Dictionary<String,Any>)->Dictionary<String,Any>? {
+    public func request_cajcloud_error_redo(itemPara:Dictionary<String,Any>)->Dictionary<String,Any>? {
 
         let key:String=itemPara["key"] as! String
         let postdata:Dictionary<String, Any>=itemPara["postdata"] as! Dictionary<String, Any>
