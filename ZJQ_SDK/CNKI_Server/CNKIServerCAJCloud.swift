@@ -291,6 +291,10 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     //    }
     public func URLPerform(httpURL:String,sign:String,timestamp:String,body:Data?,otherInfo:Dictionary<String,Any>?=nil) -> Dictionary<String,Any> {
         
+        precondition(httpURL.count > 0, "【\(#function)】 httpURL Must have value.")
+        precondition(sign.count > 0, "【\(#function)】 sign Must have value.")
+        precondition(timestamp.count > 0, "【\(#function)】 timestamp Must have value.")
+        
         var dictRet:Dictionary<String,Any> = [:]
         
         //        let charSet = NSMutableCharacterSet()
@@ -407,6 +411,8 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     /// - Returns: 返回结果或nil
     public func request_cajcloud(key:String,postdata:Dictionary<String,Any>?)->Dictionary<String,Any>? {
         
+        precondition(key.count > 0, "【\(#function)】 key Must have value.")
+        
         var dictRet:Dictionary<String, Any>?=nil
         
         let dictInfo:Dictionary<String,Any>?=self.dictCAJCloud?[key] as? Dictionary<String, Any>;
@@ -483,14 +489,18 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     /// - Returns: 返回结果或nil
     public func request_cajcloud_error_redo(itemPara:Dictionary<String,Any>)->Dictionary<String,Any>? {
         
-        let key:String=itemPara["key"] as! String
+        let key:String=(itemPara["key"] as? String) ?? ""
         let postdata:Dictionary<String, Any>=itemPara["postdata"] as! Dictionary<String, Any>
         //let httpURL:String=itemPara["httpURL"] as! String
         //let sign:String=itemPara["sign"] as! String
         //let timestamp:String=itemPara["timestamp"] as! String
         //let error=itemPara["error"]
         
-        return self.request_cajcloud(key: key, postdata: postdata)
+        if key.count > 0 {
+            return self.request_cajcloud(key: key, postdata: postdata)
+        }
+        return nil;
+        
     }
 }
 
