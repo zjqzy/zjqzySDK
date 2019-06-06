@@ -14,7 +14,7 @@
             "path":"/users/login",
             "post":"1",
             "maxRepeatRequestWhenError":"3",
-            "whichErrorCanRepeat":"-180001,-180002",
+            "whichErrorCanRepeat":"-180001:不响应或timeout,-180002:转json失败",
             "notificationWhenError":"1",
             "timeout":"0",
             "other":""
@@ -26,7 +26,6 @@
             "path":"/users/logout",
             "post":"1",
             "maxRepeatRequestWhenError":"3",
-            "whichErrorCanRepeat":"-180001,-180002",
             "notificationWhenError":"1",
             "timeout":"0",
             "other":""
@@ -35,3 +34,5 @@
     },
     "end":"end"
 }
+
+

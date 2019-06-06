@@ -16,7 +16,7 @@ public let k_notification_cajcloud_error: String = "k_notification_cajcloud_requ
 
 
 open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
-
+    
     /// 服务地址
     open var cnki_cajcloud_Server:String = "";
     open func z_Server(_ url : String?) -> CNKIServerCAJCloud?{
@@ -44,11 +44,11 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         if secretKey != nil {
             self.appSecretKey=secretKey!;
             
-//            if self.block_custom != nil {
-//                var para1:Dictionary<String,Any>=[:]
-//                para1["a"]="靠"
-//                _=self.block_custom?(para1);
-//            } //测试ok
+            //            if self.block_custom != nil {
+            //                var para1:Dictionary<String,Any>=[:]
+            //                para1["a"]="靠"
+            //                _=self.block_custom?(para1);
+            //            } //测试ok
             
             return self;
         }
@@ -122,7 +122,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         // json
         let bundle:Bundle=Bundle(for: type(of: self));
         let jsonFile:String?=bundle.path(forResource: "cnki_server", ofType: "json", inDirectory: "cnki_server.bundle");
-
+        
         if jsonFile != nil {
             _=self.load(jsonFilePath: jsonFile!)
         }
@@ -140,7 +140,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         var dictRet:Dictionary<String,Any>?
         
         let fileManager = FileManager.default
-
+        
         //let jsonFilePath = Bundle.main.path(forResource: fileNameStr, ofType: type);
         if !fileManager.fileExists(atPath: jsonFilePath) {
             return dictRet
@@ -261,34 +261,34 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         }
     }
     
-//    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void){
-//
-//        var disposition = URLSession.AuthChallengeDisposition.performDefaultHandling
-//
-//        var credential:URLCredential? = nil
-//        /*disposition：如何处理证书
-//         performDefaultHandling:默认方式处理
-//         useCredential：使用指定的证书
-//         cancelAuthenticationChallenge：取消请求
-//         */
-//
-//        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
-//            credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
-//
-//            if credential != nil {
-//                disposition = URLSession.AuthChallengeDisposition.useCredential
-//            }
-//        }else if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodClientCertificate {
-//            //单向验证，客户端不需要服务端验证，此处与默认处理一致即可
-//            disposition = URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge
-//        }
-//        else {
-//            disposition = URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge
-//        }
-//
-//        completionHandler(disposition, credential)
-//
-//    }
+    //    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void){
+    //
+    //        var disposition = URLSession.AuthChallengeDisposition.performDefaultHandling
+    //
+    //        var credential:URLCredential? = nil
+    //        /*disposition：如何处理证书
+    //         performDefaultHandling:默认方式处理
+    //         useCredential：使用指定的证书
+    //         cancelAuthenticationChallenge：取消请求
+    //         */
+    //
+    //        if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+    //            credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+    //
+    //            if credential != nil {
+    //                disposition = URLSession.AuthChallengeDisposition.useCredential
+    //            }
+    //        }else if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodClientCertificate {
+    //            //单向验证，客户端不需要服务端验证，此处与默认处理一致即可
+    //            disposition = URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge
+    //        }
+    //        else {
+    //            disposition = URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge
+    //        }
+    //
+    //        completionHandler(disposition, credential)
+    //
+    //    }
     public func URLPerform(httpURL:String,sign:String,timestamp:String,body:Data?,otherInfo:Dictionary<String,Any>?=nil) -> Dictionary<String,Any> {
         
         var dictRet:Dictionary<String,Any> = [:]
@@ -327,10 +327,10 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         }
         
         // 开始请求
-//        let session = URLSession.shared
+        //        let session = URLSession.shared
         let config = URLSessionConfiguration.default
         if otherInfo != nil {
-
+            
             let timeout:TimeInterval = TimeInterval(otherInfo?["timeout"] as! String) ?? 0
             
             if timeout > 1 {
@@ -363,7 +363,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
                     dictRet["CAJErrorMsg"]="请求成功，转换json失败：\(str!)"
                     
                     ZJQLogger.zPrint("请求成功，转换json失败:\(str!)");
-
+                    
                 }
                 else
                 {
@@ -386,7 +386,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             }
             
             _ = semaphore.signal()
-
+            
             } as URLSessionTask;
         
         //使用resume方法启动任务
@@ -432,18 +432,23 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         // 执行
         dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body, otherInfo: dictInfo)
         
+        var error1:String? = dictRet?["CAJErrorCode"] as? String
+        
         // 尝试请求次数
         self.repeatRequestWhenError=1;
         let maxRepeatRequestWhenError:Int = Int("\(dictInfo?["maxRepeatRequestWhenError"] ?? 0)") ?? 0
-        let whichErrorCanRepeat:String = (dictInfo?["maxRepeatRequestWhenError"] as? String) ?? ""
-        var error1:String? = dictRet?["CAJErrorCode"] as? String
-        
-        let findErrorCanRepeat = whichErrorCanRepeat.range(of: (error1 ?? ""))
+        let whichErrorCanRepeat:String = (dictInfo?["whichErrorCanRepeat"] as? String) ?? ""
         
         while error1 != nil
-            && findErrorCanRepeat != nil
             &&  maxRepeatRequestWhenError>self.repeatRequestWhenError
         {
+            
+            if whichErrorCanRepeat.count>0 && error1 != nil {
+                let range1 = whichErrorCanRepeat.range(of: error1!)
+                if range1 == nil {
+                    break;
+                }
+            }
             
             self.repeatRequestWhenError += 1;
             dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body, otherInfo: dictInfo)
@@ -477,7 +482,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     /// - Parameter itemPara: 特定参数
     /// - Returns: 返回结果或nil
     public func request_cajcloud_error_redo(itemPara:Dictionary<String,Any>)->Dictionary<String,Any>? {
-
+        
         let key:String=itemPara["key"] as! String
         let postdata:Dictionary<String, Any>=itemPara["postdata"] as! Dictionary<String, Any>
         //let httpURL:String=itemPara["httpURL"] as! String
@@ -488,3 +493,4 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         return self.request_cajcloud(key: key, postdata: postdata)
     }
 }
+
