@@ -10,7 +10,7 @@
 import UIKit
 
 open class CNKIServerECP: NSObject {
-
+    
     // MARK: - 存储属性 -
     /// 电商服务地址
     open var cnki_ecp_Server:String = "";
@@ -25,7 +25,7 @@ open class CNKIServerECP: NSObject {
     open var appKey:String = "";
     open var appSecretKey:String = "";
     
-    func z_initPare(_ server:String) -> (_ tokenServer:String) -> (_ appkey:String) -> ( _ secretKey:String) ->Void {
+    open func z_initPare(_ server:String) -> (_ tokenServer:String) -> (_ appkey:String) -> ( _ secretKey:String) ->Void {
         
         return {(_ tokenServer:String) -> (_ appkey:String) -> ( _ secretKey:String) ->Void in
             return { (_ appkey:String) -> (_ secretKey:String) ->Void in
@@ -58,7 +58,7 @@ open class CNKIServerECP: NSObject {
     deinit {
         ZJQLogger.zPrint("析构: \(type(of: self))")
     }
-
+    
     // MARK: - 基础方法 -
     public func dictFromResponseData( data:Data,msg:String)->Dictionary<String, Any>?{
         
@@ -91,12 +91,12 @@ open class CNKIServerECP: NSObject {
         var request = URLRequest(url: URL(string: httpURL!)!)
         
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-
+        
         // post
         request.httpMethod = "POST"
         let body1:String="client_id=\(self.appKey)&client_secret=\(self.appSecretKey)&grant_type=client_credentials"
         request.httpBody = body1.data(using: .utf8);
-
+        
         // 开始请求
         let session = URLSession.shared
         
@@ -237,7 +237,8 @@ open class CNKIServerECP: NSObject {
         let dictRet = self.URLPerform(httpURL: httpURL)
         
         return dictRet
-
+        
     }
     
 }
+
