@@ -201,6 +201,25 @@ open class CNKIServerECP: NSObject {
     // MARK: - 扩展 -
     
     
+    /// 基础调用
+    ///
+    /// - Parameters:
+    ///   - type: 类型，例如 “/Resourceserver/resource/search”
+    ///   - query: 条件，参考API说明
+    /// - Returns: 结果或nil
+    public func invoke(type:String,query:String = "")->Dictionary<String,Any>?{
+        
+        guard type.count > 0 else {
+            return nil;
+        }
+        
+        let httpURL="\(self.cnki_ecp_Server)\(type)\(query)"
+        
+        let dictRet = self.URLPerform(httpURL: httpURL)
+        
+        return dictRet
+    }
+    
     /// 获取充值历史交易记录
     ///
     /// - Parameters:

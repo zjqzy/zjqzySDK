@@ -15,10 +15,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        var dict1:Dictionary<String,Any> = [:]
-        dict1["a"]="a"
-        dict1["b"]=nil
-        
         CNKIServerOData.sharedInstance.z_initPare("1")("2")("3")
         
         CNKIServerCAJCloud.sharedInstance.block_custom = {(para1) -> () in
@@ -33,8 +29,6 @@ class ViewController: UIViewController {
         
 
         ZJQLogger.zPrint("\(CNKIServerCAJCloud.sharedInstance.cnki_cajcloud_Server)+\(CNKIServerCAJCloud.sharedInstance.appKey)+\(CNKIServerCAJCloud.sharedInstance.appSecretKey)")
-        
-
         
         
     }
