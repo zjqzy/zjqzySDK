@@ -21,9 +21,8 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.source_files = [
-    'ZJQ_SDK/ZJQ_Log/*.{h,swift}',
-    'ZJQ_SDK/CNKI_Server/*.{h,swift}',
-    'ZJQ_SDK/CNKI_Common_oc/*.{h,swift,m}',
+    'ZJQ_SDK/ZJQ_Log/*.{h,m,swift}',
+    'ZJQ_SDK/CNKI_Server/*.{h,m,swift}',
   ]
 
   s.resources = 'ZJQ_SDK/**/*.bundle'

@@ -23,15 +23,6 @@
 		665F0D002297EB8700AC4102 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 665F0CFF2297EB8700AC4102 /* libiconv.tbd */; };
 		66CBEEBA22A66AF3000F126F /* CNKIServerCAJCloud+ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66CBEEB922A66AF3000F126F /* CNKIServerCAJCloud+ex.swift */; };
 		66E8135822AF94810080F7E0 /* ZJQException.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E8135722AF94810080F7E0 /* ZJQException.swift */; };
-		66E8137622AFA3EE0080F7E0 /* CNKI_Z_Queue.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E8136422AFA3EE0080F7E0 /* CNKI_Z_Queue.m */; };
-		66E8137722AFA3EE0080F7E0 /* CNKI_Z_File.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E8136622AFA3EE0080F7E0 /* CNKI_Z_File.m */; };
-		66E8137822AFA3EE0080F7E0 /* CNKI_Z_Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E8136722AFA3EE0080F7E0 /* CNKI_Z_Device.m */; };
-		66E8137922AFA3EE0080F7E0 /* CNKI_Z_Exception.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E8136822AFA3EE0080F7E0 /* CNKI_Z_Exception.m */; };
-		66E8137A22AFA3EE0080F7E0 /* CNKI_Z_Operation.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E8136922AFA3EE0080F7E0 /* CNKI_Z_Operation.m */; };
-		66E8137B22AFA3EE0080F7E0 /* CNKI_Z_Lib.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E8136B22AFA3EE0080F7E0 /* CNKI_Z_Lib.m */; };
-		66E8137C22AFA3EE0080F7E0 /* CNKI_Z_GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E8136F22AFA3EE0080F7E0 /* CNKI_Z_GDataXMLNode.m */; };
-		66E8137D22AFA3EE0080F7E0 /* CNKI_Z_GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E8137222AFA3EE0080F7E0 /* CNKI_Z_GTMBase64.m */; };
-		66E8137E22AFA3EE0080F7E0 /* CNKI_Z_UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 66E8137522AFA3EE0080F7E0 /* CNKI_Z_UICKeyChainStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,25 +45,6 @@
 		665F0CFF2297EB8700AC4102 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		66CBEEB922A66AF3000F126F /* CNKIServerCAJCloud+ex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CNKIServerCAJCloud+ex.swift"; sourceTree = "<group>"; };
 		66E8135722AF94810080F7E0 /* ZJQException.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJQException.swift; sourceTree = "<group>"; };
-		66E8136322AFA3EE0080F7E0 /* CNKI_Z_GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNKI_Z_GTMDefines.h; sourceTree = "<group>"; };
-		66E8136422AFA3EE0080F7E0 /* CNKI_Z_Queue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNKI_Z_Queue.m; sourceTree = "<group>"; };
-		66E8136522AFA3EE0080F7E0 /* CNKI_Z_GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNKI_Z_GDataXMLNode.h; sourceTree = "<group>"; };
-		66E8136622AFA3EE0080F7E0 /* CNKI_Z_File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNKI_Z_File.m; sourceTree = "<group>"; };
-		66E8136722AFA3EE0080F7E0 /* CNKI_Z_Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNKI_Z_Device.m; sourceTree = "<group>"; };
-		66E8136822AFA3EE0080F7E0 /* CNKI_Z_Exception.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNKI_Z_Exception.m; sourceTree = "<group>"; };
-		66E8136922AFA3EE0080F7E0 /* CNKI_Z_Operation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNKI_Z_Operation.m; sourceTree = "<group>"; };
-		66E8136A22AFA3EE0080F7E0 /* CNKI_Z_GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNKI_Z_GTMBase64.h; sourceTree = "<group>"; };
-		66E8136B22AFA3EE0080F7E0 /* CNKI_Z_Lib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNKI_Z_Lib.m; sourceTree = "<group>"; };
-		66E8136C22AFA3EE0080F7E0 /* CNKI_Z_UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNKI_Z_UICKeyChainStore.h; sourceTree = "<group>"; };
-		66E8136D22AFA3EE0080F7E0 /* CNKI_Z_File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNKI_Z_File.h; sourceTree = "<group>"; };
-		66E8136E22AFA3EE0080F7E0 /* CNKI_Z_Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNKI_Z_Device.h; sourceTree = "<group>"; };
-		66E8136F22AFA3EE0080F7E0 /* CNKI_Z_GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNKI_Z_GDataXMLNode.m; sourceTree = "<group>"; };
-		66E8137022AFA3EE0080F7E0 /* CNKI_Z_Queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNKI_Z_Queue.h; sourceTree = "<group>"; };
-		66E8137122AFA3EE0080F7E0 /* CNKI_Z_Lib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNKI_Z_Lib.h; sourceTree = "<group>"; };
-		66E8137222AFA3EE0080F7E0 /* CNKI_Z_GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNKI_Z_GTMBase64.m; sourceTree = "<group>"; };
-		66E8137322AFA3EE0080F7E0 /* CNKI_Z_Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNKI_Z_Operation.h; sourceTree = "<group>"; };
-		66E8137422AFA3EE0080F7E0 /* CNKI_Z_Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNKI_Z_Exception.h; sourceTree = "<group>"; };
-		66E8137522AFA3EE0080F7E0 /* CNKI_Z_UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNKI_Z_UICKeyChainStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +65,6 @@
 		66244800229BB6ED007B54F4 /* ZJQ_SDK */ = {
 			isa = PBXGroup;
 			children = (
-				66E8136222AFA3EE0080F7E0 /* CNKI_Common_oc */,
 				66244801229BB6ED007B54F4 /* CNKI_Server */,
 				66244805229BB6ED007B54F4 /* ZJQ_Log */,
 			);
@@ -162,32 +133,6 @@
 				665F0CF92297EB5200AC4102 /* libc++.tbd */,
 			);
 			path = Frameworks;
-			sourceTree = "<group>";
-		};
-		66E8136222AFA3EE0080F7E0 /* CNKI_Common_oc */ = {
-			isa = PBXGroup;
-			children = (
-				66E8136E22AFA3EE0080F7E0 /* CNKI_Z_Device.h */,
-				66E8136722AFA3EE0080F7E0 /* CNKI_Z_Device.m */,
-				66E8137422AFA3EE0080F7E0 /* CNKI_Z_Exception.h */,
-				66E8136822AFA3EE0080F7E0 /* CNKI_Z_Exception.m */,
-				66E8136D22AFA3EE0080F7E0 /* CNKI_Z_File.h */,
-				66E8136622AFA3EE0080F7E0 /* CNKI_Z_File.m */,
-				66E8136522AFA3EE0080F7E0 /* CNKI_Z_GDataXMLNode.h */,
-				66E8136F22AFA3EE0080F7E0 /* CNKI_Z_GDataXMLNode.m */,
-				66E8136A22AFA3EE0080F7E0 /* CNKI_Z_GTMBase64.h */,
-				66E8137222AFA3EE0080F7E0 /* CNKI_Z_GTMBase64.m */,
-				66E8136322AFA3EE0080F7E0 /* CNKI_Z_GTMDefines.h */,
-				66E8137122AFA3EE0080F7E0 /* CNKI_Z_Lib.h */,
-				66E8136B22AFA3EE0080F7E0 /* CNKI_Z_Lib.m */,
-				66E8137322AFA3EE0080F7E0 /* CNKI_Z_Operation.h */,
-				66E8136922AFA3EE0080F7E0 /* CNKI_Z_Operation.m */,
-				66E8137022AFA3EE0080F7E0 /* CNKI_Z_Queue.h */,
-				66E8136422AFA3EE0080F7E0 /* CNKI_Z_Queue.m */,
-				66E8136C22AFA3EE0080F7E0 /* CNKI_Z_UICKeyChainStore.h */,
-				66E8137522AFA3EE0080F7E0 /* CNKI_Z_UICKeyChainStore.m */,
-			);
-			path = CNKI_Common_oc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,22 +208,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66E8137622AFA3EE0080F7E0 /* CNKI_Z_Queue.m in Sources */,
-				66E8137922AFA3EE0080F7E0 /* CNKI_Z_Exception.m in Sources */,
 				66244809229BB6ED007B54F4 /* CNKIServerCAJCloud.swift in Sources */,
 				66E8135822AF94810080F7E0 /* ZJQException.swift in Sources */,
-				66E8137722AFA3EE0080F7E0 /* CNKI_Z_File.m in Sources */,
-				66E8137C22AFA3EE0080F7E0 /* CNKI_Z_GDataXMLNode.m in Sources */,
-				66E8137B22AFA3EE0080F7E0 /* CNKI_Z_Lib.m in Sources */,
-				66E8137D22AFA3EE0080F7E0 /* CNKI_Z_GTMBase64.m in Sources */,
 				66CBEEBA22A66AF3000F126F /* CNKIServerCAJCloud+ex.swift in Sources */,
 				66244807229BB6ED007B54F4 /* CNKIServerECP.swift in Sources */,
-				66E8137822AFA3EE0080F7E0 /* CNKI_Z_Device.m in Sources */,
-				66E8137E22AFA3EE0080F7E0 /* CNKI_Z_UICKeyChainStore.m in Sources */,
 				66244808229BB6ED007B54F4 /* CNKIServerOData.swift in Sources */,
 				664AB759229252D9003CEDCD /* ViewController.swift in Sources */,
 				664AB757229252D9003CEDCD /* AppDelegate.swift in Sources */,
-				66E8137A22AFA3EE0080F7E0 /* CNKI_Z_Operation.m in Sources */,
 				6624480A229BB6ED007B54F4 /* ZJQLogger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
