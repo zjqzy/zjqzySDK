@@ -86,7 +86,7 @@ open class CNKIServerECP: NSObject {
         //var dictRet:Dictionary<String,Any>=Dictionary<String,Any>();
         var dictRet:Dictionary<String,Any>?
         
-        let httpURL = self.cnki_token_Server.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let httpURL = cnki_token_Server.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         
         var request = URLRequest(url: URL(string: httpURL!)!)
         
@@ -94,7 +94,7 @@ open class CNKIServerECP: NSObject {
         
         // post
         request.httpMethod = "POST"
-        let body1:String="client_id=\(self.appKey)&client_secret=\(self.appSecretKey)&grant_type=client_credentials"
+        let body1:String="client_id=\(appKey)&client_secret=\(appSecretKey)&grant_type=client_credentials"
         request.httpBody = body1.data(using: .utf8);
         
         // 开始请求

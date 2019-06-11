@@ -93,7 +93,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         // 返回 秒
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
-        let timeStamp = Int(timeInterval-self.timeDifference)
+        let timeStamp = Int(timeInterval-timeDifference)
         return "\(timeStamp)"
         
     }
@@ -101,7 +101,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     public var nowServerTimeStamp_Millisecond : String {
         // 返回 毫秒
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
-        let millisecond = CLongLong(round((timeInterval-self.timeDifference)*1000))
+        let millisecond = CLongLong(round((timeInterval-timeDifference)*1000))
         return "\(millisecond)"
     }
     
@@ -210,7 +210,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         for row in rows {
             let cells=row["Cells"]
             
-            var item:Dictionary<String,Any>=self.dictionaryFromArray(fields: cells as! Array<Dictionary<String, Any>>);
+            var item:Dictionary<String,Any>=dictionaryFromArray(fields: cells as! Array<Dictionary<String, Any>>);
             
             if  item.keys.count>0 {
                 item["Id"]=row["Id"]
