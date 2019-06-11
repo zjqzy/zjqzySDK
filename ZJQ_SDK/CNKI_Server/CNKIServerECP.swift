@@ -204,18 +204,18 @@ open class CNKIServerECP: NSObject {
     /// 基础调用
     ///
     /// - Parameters:
-    ///   - type: 类型，例如 “/Resourceserver/resource/search”
+    ///   - path: 类型，例如 “/Resourceserver/resource/search”
     ///   - query: 条件，参考API说明
     /// - Returns: 结果或nil
-    public func invoke(type:String,query:String = "")->Dictionary<String,Any>?{
+    public func invoke(path:String,query:String = "")->Dictionary<String,Any>?{
         
-        guard type.count > 0 else {
+        guard path.count > 0 else {
             return nil;
         }
         
-        let httpURL="\(self.cnki_ecp_Server)\(type)\(query)"
+        let httpURL="\(cnki_ecp_Server)\(path)\(query)"
         
-        let dictRet = self.URLPerform(httpURL: httpURL)
+        let dictRet = URLPerform(httpURL: httpURL)
         
         return dictRet
     }
@@ -232,9 +232,9 @@ open class CNKIServerECP: NSObject {
     /// - Returns: 服务器结果，可选类型
     public func log_get_recharge_history(userName:String,paySources:String,startDate:String = "",endDate:String = "",spIds:String = "",status:String = "")->Dictionary<String,Any>? {
         
-        let httpURL="\(self.cnki_ecp_Server)/Log/get_recharge_history?userName=\(userName)&paySources=\(paySources)"
+        let httpURL="\(cnki_ecp_Server)/Log/get_recharge_history?userName=\(userName)&paySources=\(paySources)"
         
-        let dictRet = self.URLPerform(httpURL: httpURL)
+        let dictRet = URLPerform(httpURL: httpURL)
         
         return dictRet
         

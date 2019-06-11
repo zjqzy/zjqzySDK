@@ -409,13 +409,13 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     ///   - key: 请求key
     ///   - postdata: 参数
     /// - Returns: 返回结果或nil
-    public func request_cajcloud(key:String,postdata:Dictionary<String,Any>?)->Dictionary<String,Any>? {
+    public func invoke(key:String,postdata:Dictionary<String,Any>?)->Dictionary<String,Any>? {
         
         precondition(key.count > 0, "【\(#function)】 key Must have value.")
         
         var dictRet:Dictionary<String, Any>?=nil
         
-        let dictInfo:Dictionary<String,Any>?=self.dictCAJCloud?[key] as? Dictionary<String, Any>;
+        let dictInfo:Dictionary<String,Any>?=dictCAJCloud?[key] as? Dictionary<String, Any>;
         
         guard dictInfo != nil else {
             return dictRet;
@@ -423,12 +423,12 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         let path:String=(dictInfo?["path"] as? String) ?? ""
         
-        self.cajcloudTimeStamp=self.nowServerTimeStamp;
+        cajcloudTimeStamp=nowServerTimeStamp;
         
-        let sign1 = "\(self.cajcloudTimeStamp)\(self.appKey)"
-        let sign = self.sha1(src:sign1)
+        let sign1 = "\(cajcloudTimeStamp)\(appKey)"
+        let sign = sha1(src:sign1)
         
-        let httpURL="\(self.cnki_cajcloud_Server)\(path)"
+        let httpURL="\(cnki_cajcloud_Server)\(path)"
         
         var body:Data?=nil;
         if postdata != nil {
@@ -436,17 +436,17 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         }
         
         // 执行
-        dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body, otherInfo: dictInfo)
+        dictRet=URLPerform(httpURL: httpURL, sign: sign, timestamp: cajcloudTimeStamp, body: body, otherInfo: dictInfo)
         
         var error1:String? = dictRet?["CAJErrorCode"] as? String
         
         // 尝试请求次数
-        self.repeatRequestWhenError=1;
+        repeatRequestWhenError=1;
         let maxRepeatRequestWhenError:Int = Int("\(dictInfo?["maxRepeatRequestWhenError"] ?? 0)") ?? 0
         let whichErrorCanRepeat:String = (dictInfo?["whichErrorCanRepeat"] as? String) ?? ""
         
         while error1 != nil
-            &&  maxRepeatRequestWhenError>self.repeatRequestWhenError
+            &&  maxRepeatRequestWhenError>repeatRequestWhenError
         {
             
             if whichErrorCanRepeat.count>0 && error1 != nil {
@@ -456,8 +456,8 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
                 }
             }
             
-            self.repeatRequestWhenError += 1;
-            dictRet=self.URLPerform(httpURL: httpURL, sign: sign, timestamp: self.cajcloudTimeStamp, body: body, otherInfo: dictInfo)
+            repeatRequestWhenError += 1;
+            dictRet=URLPerform(httpURL: httpURL, sign: sign, timestamp: cajcloudTimeStamp, body: body, otherInfo: dictInfo)
             
             error1 = dictRet?["CAJErrorCode"] as? String
         }
@@ -472,7 +472,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             notifyPara["postdata"]=postdata
             notifyPara["httpURL"]=httpURL
             notifyPara["sign"]=sign
-            notifyPara["timestamp"]=self.cajcloudTimeStamp
+            notifyPara["timestamp"]=cajcloudTimeStamp
             notifyPara["error"]=error1;
             
             NotificationCenter.default.post(name: Notification.Name.init(k_notification_cajcloud_error), object: nil, userInfo: notifyPara)
@@ -487,7 +487,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     ///
     /// - Parameter itemPara: 特定参数
     /// - Returns: 返回结果或nil
-    public func request_cajcloud_error_redo(itemPara:Dictionary<String,Any>)->Dictionary<String,Any>? {
+    public func invoke_error_redo(itemPara:Dictionary<String,Any>)->Dictionary<String,Any>? {
         
         let key:String=(itemPara["key"] as? String) ?? ""
         let postdata:Dictionary<String, Any>=itemPara["postdata"] as! Dictionary<String, Any>
@@ -497,7 +497,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         //let error=itemPara["error"]
         
         if key.count > 0 {
-            return self.request_cajcloud(key: key, postdata: postdata)
+            return invoke(key: key, postdata: postdata)
         }
         return nil;
         

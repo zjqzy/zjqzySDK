@@ -20,7 +20,7 @@ open class CNKIServerOData: NSObject {
     open var appKey:String = "";
     open var appSecretKey:String = "";
     
-    func z_initPare(_ server:String) -> (_ appkey:String) -> ( _ secretKey:String) ->Void {
+    open func z_initPare(_ server:String) -> (_ appkey:String) -> ( _ secretKey:String) ->Void {
         
         return { (_ appkey:String) -> (_ secretKey:String) ->Void in
             return {  (_ secretKey:String) ->Void in
@@ -52,7 +52,7 @@ open class CNKIServerOData: NSObject {
         
         // 返回 秒
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
-        let timeStamp = Int(timeInterval-self.timeDifference)
+        let timeStamp = Int(timeInterval-timeDifference)
         return "\(timeStamp)"
         
     }
@@ -60,7 +60,7 @@ open class CNKIServerOData: NSObject {
     public var nowServerTimeStamp_Millisecond : String {
         // 返回 毫秒
         let timeInterval: TimeInterval = Date().timeIntervalSince1970
-        let millisecond = CLongLong(round((timeInterval-self.timeDifference)*1000))
+        let millisecond = CLongLong(round((timeInterval-timeDifference)*1000))
         return "\(millisecond)"
     }
     
@@ -135,7 +135,7 @@ open class CNKIServerOData: NSObject {
         for row in rows {
             let cells=row["Cells"]
             
-            var item:Dictionary<String,Any>=self.dictionaryFromArray(fields: cells as! Array<Dictionary<String, Any>>);
+            var item:Dictionary<String,Any>=dictionaryFromArray(fields: cells as! Array<Dictionary<String, Any>>);
             
             if  item.keys.count>0 {
                 item["Id"]=row["Id"]
@@ -254,20 +254,20 @@ open class CNKIServerOData: NSObject {
     }
     
     // MARK: - 扩展 -
-    public func search(type:String,fields:String,query:String = "",group:String = "",order:String = "",start:String = "0" ,length:String = "20")->Dictionary<String, Any>?{
+    public func invoke(type:String,fields:String,query:String = "",group:String = "",order:String = "",start:String = "0" ,length:String = "20")->Dictionary<String, Any>?{
         
         var dictRet:Dictionary<String, Any>?
         
         
-        self.odataTimeStamp=self.nowServerTimeStamp;
+        odataTimeStamp=nowServerTimeStamp;
         
-        let sign1="timestamp=\(self.odataTimeStamp)&appid=\(self.appKey)&appkey=\(self.appSecretKey)&ip=\(self.deviceIP)&location=\(self.deviceLocation)&mobile=\(self.phoneNumber)&did=\(self.deviceID)&op=data_gets&type=\(type)&fields=\(fields)&query=\(query)&group=\(group)&order=\(order)"
+        let sign1="timestamp=\(odataTimeStamp)&appid=\(appKey)&appkey=\(appSecretKey)&ip=\(deviceIP)&location=\(deviceLocation)&mobile=\(phoneNumber)&did=\(deviceID)&op=data_gets&type=\(type)&fields=\(fields)&query=\(query)&group=\(group)&order=\(order)"
         
-        let sign = self.sha1(src:sign1)
+        let sign = sha1(src:sign1)
 
-        let httpURL = "\(self.cnki_odata_Server)/api/db/\(type)?fields=\(fields)&query=\(query)&group=\(group)&order=\(order)&start=\(start)&length=\(length)"
+        let httpURL = "\(cnki_odata_Server)/api/db/\(type)?fields=\(fields)&query=\(query)&group=\(group)&order=\(order)&start=\(start)&length=\(length)"
         
-        dictRet=self.URLPerform(httpURL: httpURL , sign: sign)
+        dictRet=URLPerform(httpURL: httpURL , sign: sign)
         
         return dictRet;
     }
