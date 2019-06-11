@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "zjqzySDK"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "zjqzySDK swift"
   s.description  = <<-DESC
                    Written in Swift.
@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
   s.source_files = [
     'ZJQ_SDK/ZJQ_Log/*.{h,swift}',
     'ZJQ_SDK/CNKI_Server/*.{h,swift}',
+    'ZJQ_SDK/CNKI_Common_oc/*.{h,swift,m}',
   ]
 
   s.resources = 'ZJQ_SDK/**/*.bundle'
