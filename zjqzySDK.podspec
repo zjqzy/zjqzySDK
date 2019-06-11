@@ -2,7 +2,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "zjqzySDK"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "zjqzySDK swift"
   s.description  = <<-DESC
                    Written in Swift.
