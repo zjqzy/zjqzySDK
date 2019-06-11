@@ -127,6 +127,8 @@ open class ZJQLogger {
             fileHandle.seekToEndOfFile()
             fileHandle.write(stringToWrite.data(using: String.Encoding.utf8)!)
             
+            fileHandle.closeFile();
+            
         } catch let error as NSError {
             print("failed to append: \(error)")
         }

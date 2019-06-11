@@ -15,6 +15,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        ZJQLogger.logF("123");
+        ZJQLogger.logF("456");
+        
         CNKIServerOData.sharedInstance.z_initPare("1")("2")("3")
         
         CNKIServerCAJCloud.sharedInstance.block_custom = {(para1) -> () in
