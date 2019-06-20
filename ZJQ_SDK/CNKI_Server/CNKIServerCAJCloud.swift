@@ -67,7 +67,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     
     
     /// 当请求出错时，尝试次数
-    open var repeatRequestWhenError:Int=0;
+    var repeatRequestWhenError:Int=0;
     
     /// 额外传递的文件头信息
     open var dictHeaderExtra:Dictionary<String,String>?
