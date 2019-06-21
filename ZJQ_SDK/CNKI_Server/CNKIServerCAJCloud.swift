@@ -85,7 +85,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     
     /// json
     var dictAllInfo:Dictionary<String,Any>?
-    open var dictCAJCloud:Dictionary<String,Any>?
     
     
     // MARK: - 计算属性 -
@@ -163,7 +162,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         if dictRet != nil {
             self.dictAllInfo=dictRet;
-            self.dictCAJCloud=self.dictAllInfo?["cajcloud"] as? Dictionary<String, Any>;
         }
         
         return dictRet;
@@ -243,6 +241,25 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         return dictRet;
     }
+    public func keyFromTypes(types:String ...)->Dictionary<String,Any>?{
+        
+        var dictKey:Dictionary<String,Any>?
+        if self.dictAllInfo == nil {
+            return dictKey;
+        }
+        
+        var dictParent:Dictionary<String,Any>=self.dictAllInfo!;
+        
+        for type1 in types {
+            dictKey = dictParent[type1] as? Dictionary<String, Any>
+            if dictKey == nil {
+                break
+            }
+            dictParent=dictKey!;
+        }
+        
+        return dictKey;
+    }
     public func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         
         // 单向认证
@@ -297,10 +314,10 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         var dictRet:Dictionary<String,Any> = [:]
         
-        //        let charSet = NSMutableCharacterSet()
-        //        charSet.formUnion(with: CharacterSet.urlQueryAllowed)
-        //        charSet.addCharacters(in: "#")  // 不转的符号
-        //        let str1 = httpURL.addingPercentEncoding(withAllowedCharacters: charSet as CharacterSet)
+        //let charSet = NSMutableCharacterSet()
+        //charSet.formUnion(with: CharacterSet.urlQueryAllowed)
+        //charSet.addCharacters(in: "#")  // 不转的符号
+        //let str1 = httpURL.addingPercentEncoding(withAllowedCharacters: charSet as CharacterSet)
         
         var str1 = httpURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         //var cs=NSCharacterSet(charactersIn:"`#%^{}\"[]|\\<>//").inverted
@@ -331,7 +348,6 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         }
         
         // 开始请求
-        //        let session = URLSession.shared
         let config = URLSessionConfiguration.default
         if otherInfo != nil {
             
@@ -395,8 +411,8 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         //使用resume方法启动任务
         dataTask.resume()
-        //等待完成..
         
+        //等待完成..
         _ = semaphore.wait(timeout: DispatchTime.distantFuture)
         
         return dictRet;
@@ -490,6 +506,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         let key:Dictionary<String,Any>=itemPara["key"] as! Dictionary<String, Any>
         let postdata:Dictionary<String, Any>=itemPara["postdata"] as! Dictionary<String, Any>
+        
         //let httpURL:String=itemPara["httpURL"] as! String
         //let sign:String=itemPara["sign"] as! String
         //let timestamp:String=itemPara["timestamp"] as! String
