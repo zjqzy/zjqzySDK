@@ -7,30 +7,36 @@
     },
     
     "cajcloud":{
-        "login_user_pwd":{
-            "name":"login_user_pwd",
-            "desc":"用户登录【用户名,密码,平台,设备ID,版本】",
-            "server":"",
-            "path":"/users/login",
-            "post":"1",
-            "maxRepeatRequestWhenError":"3",
-            "whichErrorCanRepeat":"-180001:不响应或timeout,-180002:转json失败",
-            "notificationWhenError":"1",
-            "timeout":"0",
-            "other":""
+        "user":{
+            "login_user_pwd":{
+                "name":"login_user_pwd",
+                "desc":"用户登录【用户名,密码,平台,设备ID,版本】",
+                "server":"",
+                "path":"/users/login",
+                "post":"1",
+                "maxRepeatRequestWhenError":"3",
+                "whichErrorCanRepeat":"-180001:不响应或timeout,-180002:转json失败",
+                "notificationWhenError":"1",
+                "timeout":"0",
+                "other":""
+            },
+            "logout":{
+                "name":"logout",
+                "desc":"用户注销【token】",
+                "server":"",
+                "path":"/users/logout",
+                "post":"1",
+                "maxRepeatRequestWhenError":"3",
+                "whichErrorCanRepeat":"-180001:不响应或timeout,-180002:转json失败",
+                "notificationWhenError":"1",
+                "timeout":"0",
+                "other":""
+            }
         },
-        "logout":{
-            "name":"logout",
-            "desc":"用户注销【token】",
-            "server":"",
-            "path":"/users/logout",
-            "post":"1",
-            "maxRepeatRequestWhenError":"3",
-            "notificationWhenError":"1",
-            "timeout":"0",
-            "other":""
+        "org":{
+            
         }
-        
+
     },
     "end":"end"
 }

@@ -85,7 +85,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     
     /// json
     var dictAllInfo:Dictionary<String,Any>?
-    var dictCAJCloud:Dictionary<String,Any>?
+    open var dictCAJCloud:Dictionary<String,Any>?
     
     
     // MARK: - 计算属性 -
@@ -409,14 +409,13 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     ///   - key: 请求key
     ///   - postdata: 参数
     /// - Returns: 返回结果或nil
-    public func invoke(key:String,postdata:Dictionary<String,Any>?)->Dictionary<String,Any>? {
+    public func invoke(key:Dictionary<String,Any>,postdata:Dictionary<String,Any>?)->Dictionary<String,Any>? {
         
-        precondition(key.count > 0, "【\(#function)】 key Must have value.")
+        precondition(key.keys.count > 0, "【\(#function)】 key Must have value.")
         
         var dictRet:Dictionary<String, Any>?=nil
         
-        let dictInfo:Dictionary<String,Any>?=dictCAJCloud?[key] as? Dictionary<String, Any>;
-        
+        let dictInfo:Dictionary<String,Any>?=key;
         guard dictInfo != nil else {
             return dictRet;
         }
@@ -489,7 +488,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     /// - Returns: 返回结果或nil
     public func invoke_error_redo(itemPara:Dictionary<String,Any>)->Dictionary<String,Any>? {
         
-        let key:String=(itemPara["key"] as? String) ?? ""
+        let key:Dictionary<String,Any>=itemPara["key"] as! Dictionary<String, Any>
         let postdata:Dictionary<String, Any>=itemPara["postdata"] as! Dictionary<String, Any>
         //let httpURL:String=itemPara["httpURL"] as! String
         //let sign:String=itemPara["sign"] as! String
