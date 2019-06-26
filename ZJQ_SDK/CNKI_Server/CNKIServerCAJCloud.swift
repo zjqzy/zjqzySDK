@@ -44,11 +44,12 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         if secretKey != nil {
             self.appSecretKey=secretKey!;
             
-            //            if self.block_custom != nil {
-            //                var para1:Dictionary<String,Any>=[:]
-            //                para1["a"]="靠"
-            //                _=self.block_custom?(para1);
-            //            } //测试ok
+//            if self.block_custom != nil {
+//                var para1:Dictionary<String,Any>=[:]
+//                para1["a"]="靠"
+//                _=self.block_custom?(para1);
+//            } //测试ok
+
             
             return self;
         }
