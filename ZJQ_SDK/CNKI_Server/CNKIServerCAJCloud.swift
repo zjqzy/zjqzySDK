@@ -18,7 +18,31 @@ public let k_notification_cajcloud_error: String = "k_notification_cajcloud_requ
 open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     
     /// 服务地址
-    open var cnki_cajcloud_Server:String = "";
+    open var cnki_cajcloud_Server:String = ""{
+        willSet{
+            ZJQLogger.zPrint("服务器将要改为: \(newValue),目前是：\(cnki_cajcloud_Server)")
+        }
+        didSet{
+            
+            if cnki_cajcloud_Server.count < 6 {
+                cnki_cajcloud_Server = oldValue;
+            } else {
+                ZJQLogger.zPrint("服务器地址已改变，触发后续处理")
+            }
+            
+        }
+    };
+    open var server:String{
+        get{
+            return cnki_cajcloud_Server
+        }
+        set{
+            cnki_cajcloud_Server = newValue
+        }
+        
+    };
+    
+    
     open func z_Server(_ url : String?) -> CNKIServerCAJCloud?{
         
         if url != nil {
