@@ -26,6 +26,7 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
             
             if cnki_cajcloud_Server.count < 6 {
                 cnki_cajcloud_Server = oldValue;
+                ZJQLogger.zPrint("服务器地址不符合要求，重新复回原值")
             } else {
                 ZJQLogger.zPrint("服务器地址已改变，触发后续处理")
             }
