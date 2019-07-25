@@ -133,7 +133,23 @@ open class ZJQLogger {
             print("failed to append: \(error)")
         }
     }
-    
+    public static func logF_clear(logfile:String="") {
+        
+        let fileManager = FileManager.default
+        
+        var temp1=logfile
+        if temp1.count < 2 {
+            
+            let cachePath = NSHomeDirectory() + "/Library/Caches"
+            temp1 = cachePath + "/zjqlog.txt"
+        }
+        
+        if !fileManager.fileExists(atPath: temp1) {
+            
+            try? fileManager.removeItem(at: URL(fileURLWithPath: temp1))
+        }
+        
+    }
     
     /// 构造
     init() {

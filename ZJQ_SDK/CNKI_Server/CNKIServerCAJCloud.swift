@@ -92,6 +92,10 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
     open var app_language_environment:String = "cn"
     
     
+    /// 追踪请求，写入日志，默认开启
+    open var requests_tracking_enable:Bool = true
+    
+    
     /// 当请求出错时，尝试次数
     var repeatRequestWhenError:Int=0;
     
@@ -478,6 +482,11 @@ open class CNKIServerCAJCloud: NSObject,URLSessionDelegate {
         
         // 执行
         dictRet=URLPerform(httpURL: httpURL, sign: sign, timestamp: cajcloudTimeStamp, body: body, otherInfo: dictInfo)
+        
+        if requests_tracking_enable {
+            let strLog = "url=\(httpURL),\npara=\(String(describing: postdata)),\nret=\(String(describing: dictRet)) "
+            ZJQLogger.logF("\(strLog)\n\n")
+        }
         
         var error1:String? = dictRet?["CAJErrorCode"] as? String
         
