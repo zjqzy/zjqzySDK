@@ -231,7 +231,7 @@ open class CNKIServerECP: NSObject {
     ///   - status: 参数，可忽略
     /// - Returns: 服务器结果，可选类型
     public func log_get_recharge_history(userName:String,paySources:String,startDate:String = "",endDate:String = "",spIds:String = "",status:String = "")->Dictionary<String,Any>? {
-        
+        ///
         let httpURL="\(cnki_ecp_Server)/Log/get_recharge_history?userName=\(userName)&paySources=\(paySources)"
         
         let dictRet = URLPerform(httpURL: httpURL)
